@@ -1,0 +1,15 @@
+.registerForm {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+
+  input {
+    width: 100%;
+  }
+
+  button {
+    width: 30%;
+    margin: 10px auto 0;
+    cursor: pointer;
+  }
+}

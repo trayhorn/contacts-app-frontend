@@ -1,0 +1,27 @@
+@import "../../variables.scss";
+
+.contact {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  gap: 10px;
+
+  .button {
+    background-color: $mainBgColor;
+    border: 1px solid $secondaryBgColor;
+    padding: 0.25em 0.5em;
+    font-size: inherit;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $secondaryBgColor;
+      color: white;
+    }
+  }
+
+  .info {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+}

@@ -1,0 +1,52 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-top: 0;
+  text-align: center; 
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+
+  nav .link{
+    margin: 15px;
+    text-decoration: none;
+    font-size: 1.2rem;
+  }
+}
+
+.loaderOverlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+}
+
+.modal {
+  inset: 50% auto auto 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  border: 1px solid rgb(204, 204, 204);
+  background: rgb(255, 255, 255);
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+  padding: 20px;
+}
