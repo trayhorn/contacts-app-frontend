@@ -5,7 +5,6 @@ import { logoutUser } from "../../redux/authoperations";
 
 export default function SharedLayout() {
   const { isLoggedIn } = useSelector(state => state.auth);
-  console.log(isLoggedIn);
   const dispatch = useDispatch();
 
   return (
@@ -15,9 +14,11 @@ export default function SharedLayout() {
 					<Link className="link" to="/">
 						Home
 					</Link>
-					<Link className="link" to="/contacts">
-						Contacts
-					</Link>
+					{isLoggedIn && (
+						<Link className="link" to="/contacts">
+							Contacts
+						</Link>
+					)}
 				</nav>
 				{isLoggedIn ? (
 					<nav>
