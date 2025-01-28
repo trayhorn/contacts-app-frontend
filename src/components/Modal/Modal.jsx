@@ -8,6 +8,7 @@ import Modal from "react-modal";
 
 
 export default function ModalComponent() {
+	const token = useSelector(state => state.auth.token);
 	const modalState = useSelector(selectIsModalOpen);
 	const { id, name, number } = useSelector(selectContactToEdit);
 
@@ -16,7 +17,7 @@ export default function ModalComponent() {
   Modal.setAppElement("#root");
 
   const handleSubmit = (values) => {
-    dispatch(editContact({ id, ...values }));
+    dispatch(editContact({id, contact: {...values}, token}));
     dispatch(toggleModal(false));
   }
 

@@ -1,12 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-axios.defaults.baseURL = "https://63cfa01f109824043782d052.mockapi.io/";
+axios.defaults.baseURL = "https://connections-api.goit.global/";
 
 export const fetchAllContacts =
-  createAsyncThunk('contacts/fetchAll', async (_, thunkApi) => {
+  createAsyncThunk('contacts/fetchAll', async (token, thunkApi) => {
     try {
-      const { data } = await axios.get("/contacts");
+      const { data } = await axios.get("/contacts", {
+				headers: { Authorization: `Bearer ${token}` },
+			});
 			return data;
     } catch (e) {
       return thunkApi.rejectWithValue(e.message);
@@ -15,9 +17,11 @@ export const fetchAllContacts =
 
 export const addContact = createAsyncThunk(
 	"contacts/addContact",
-	async (contact, thunkApi) => {
+	async (params, thunkApi) => {
 		try {
-			const { data } = await axios.post("/contacts", contact);
+			const { data } = await axios.post("/contacts", params.contact, {
+				headers: { Authorization: `Bearer ${params.token} `}
+			});
 			return data;
 		} catch (e) {
 			return thunkApi.rejectWithValue(e.message);
@@ -27,9 +31,15 @@ export const addContact = createAsyncThunk(
 
 export const deleteContact = createAsyncThunk(
 	"contacts/deleteContact",
-	async (contactId, thunkApi) => {
+	async (params, thunkApi) => {
+		console.log(params);
 		try {
-			const { data } = await axios.delete(`/contacts/${contactId}`);
+			const { data } = await axios.delete(
+				`/contacts/${params.id}`,
+				{
+					headers: { Authorization: `Bearer ${params.token}` },
+				}
+			);
 			return data;
 		} catch (e) {
 			return thunkApi.rejectWithValue(e.message);
@@ -39,9 +49,11 @@ export const deleteContact = createAsyncThunk(
 
 export const editContact = createAsyncThunk(
 	"contacts/editContact",
-	async (contact, thunkApi) => {
+	async (params, thunkApi) => {
 		try {
-			const { data } = await axios.put(`/contacts/${contact.id}`, contact);
+			const { data } = await axios.patch(`/contacts/${params.id}`, params.contact, {
+				headers: { Authorization: `Bearer ${params.token}` },
+			});
       return data;
 		} catch (e) {
 			return thunkApi.rejectWithValue(e.message);

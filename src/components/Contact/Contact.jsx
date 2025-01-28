@@ -3,13 +3,14 @@ import PropTypes from "prop-types";
 import { FaPhoneAlt } from "react-icons/fa";
 import { BsPersonFill } from "react-icons/bs";
 import { MdDelete, MdEdit } from "react-icons/md";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleModal } from "../../redux/modalSlice";
 import { passEditId } from "../../redux/contactsSlice";
 import { deleteContact } from "../../redux/operations";
 
 export default function Contact({ contact: {id, name, number } }) {
 	const dispatch = useDispatch();
+	const token = useSelector((state) => state.auth.token);
 
 	const handleEditClick = () => {
 		dispatch(passEditId({id, name, number}));
@@ -32,7 +33,7 @@ export default function Contact({ contact: {id, name, number } }) {
 				<MdEdit />
 			</button>
 			<button className="button" onClick={() => {
-				dispatch(deleteContact(id));
+				dispatch(deleteContact({id, token}));
 			}}>
 				<MdDelete />
 			</button>

@@ -28,7 +28,7 @@ export const loginUser = createAsyncThunk("auth/login", async (body) => {
 export const logoutUser = createAsyncThunk("auth/logout", async () => {
   try {
     const { data } = await axios.post("/users/logout", null, {
-      headers: { 'Authorization': `Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}` }
     })
     token = '';
     return data;

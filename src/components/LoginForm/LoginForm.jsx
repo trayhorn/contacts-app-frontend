@@ -17,7 +17,7 @@ export default function LoginForm() {
       <Form className="registerForm">
         <label>
           Email
-          <Field type="email" name="email" />
+          <Field autoComplete='true' type="email" name="email" />
         </label>
         <label>
           Password

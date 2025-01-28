@@ -6,6 +6,7 @@ import FormikForm from "../FormikForm/FormikForm";
 
 export default function ContactForm() {
 	const dispatch = useDispatch();
+	const token = useSelector(state => state.auth.token);
 
 	const allContacts = useSelector(selectAllContacts);
 
@@ -14,7 +15,7 @@ export default function ContactForm() {
 			alert('Contact already exists');
 			return;
 		}
-		dispatch(addContact({ ...values }));
+		dispatch(addContact({ contact: {...values}, token }));
 	};
 
 	return (
