@@ -7,10 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleModal } from "../../redux/modalSlice";
 import { passEditId } from "../../redux/contactsSlice";
 import { deleteContact } from "../../redux/operations";
+import { selectToken } from "../../redux/auth/selectors";
 
 export default function Contact({ contact: {id, name, number } }) {
 	const dispatch = useDispatch();
-	const token = useSelector((state) => state.auth.token);
+	const token = useSelector(selectToken);
 
 	const handleEditClick = () => {
 		dispatch(passEditId({id, name, number}));

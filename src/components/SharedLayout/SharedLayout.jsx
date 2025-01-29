@@ -1,41 +1,49 @@
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import './SharedLayout.scss';
-import { useSelector, useDispatch } from "react-redux";
-import { logoutUser } from "../../redux/authoperations";
+import { useSelector } from "react-redux";
+import { ThreeDots } from "react-loader-spinner";
+import AppBar from "../AppBar";
+import { Suspense } from "react";
+import { selectAuth } from "../../redux/auth/selectors";
 
 export default function SharedLayout() {
-  const { isLoggedIn } = useSelector(state => state.auth);
-  const dispatch = useDispatch();
+	const { isRefreshing, loading } = useSelector(selectAuth);
 
   return (
-		<main>
-			<header>
-				<nav>
-					<Link className="link" to="/">
-						Home
-					</Link>
-					{isLoggedIn && (
-						<Link className="link" to="/contacts">
-							Contacts
-						</Link>
-					)}
-				</nav>
-				{isLoggedIn ? (
-					<nav>
-						<button onClick={() => dispatch(logoutUser())}>Log out</button>
-					</nav>
-				) : (
-					<nav>
-						<Link to="/login">
-							<button className="link">Log in</button>
-						</Link>
-						<Link to="/register">
-							<button className="link">Sign in</button>
-						</Link>
-					</nav>
-				)}
-			</header>
-			<Outlet />
-		</main>
+		<>
+			{isRefreshing ? (
+				<div className="loaderOverlay">
+					<ThreeDots
+						visible={true}
+						height="80"
+						width="80"
+						color="#4CAF50"
+						ariaLabel="three-dots-loading"
+						wrapperClass="loader"
+					/>
+				</div>
+			) : (
+				<main>
+					<AppBar />
+					<Suspense fallback={<div>Loading...</div>}>
+						{loading ? (
+							<div className="loaderOverlay">
+								<ThreeDots
+									visible={true}
+									height="80"
+									width="80"
+									color="#4CAF50"
+									ariaLabel="three-dots-loading"
+									wrapperClass="loader"
+								/>
+							</div>
+						) : (
+							<Outlet />
+						)}
+						{/* <Outlet /> */}
+					</Suspense>
+				</main>
+			)}
+		</>
 	);
 }

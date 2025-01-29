@@ -1,7 +1,7 @@
 import { Formik, Form, Field } from "formik";
-import './RegisterForm.scss';
+import './RegisterPage.scss';
 import { useDispatch } from "react-redux";
-import { registerUser } from "../../redux/authoperations";
+import { registerUser } from "../../redux/auth/operations";
 
 export default function RegisterForm() {
   const dispatch = useDispatch();

@@ -1,21 +1,27 @@
-import './App.scss';
+import "./App.scss";
+import { lazy } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import ContactsPage from './pages/ContactsPage';
-import RegisterForm from './components/RegisterForm/RegisterForm';
-import LoginForm from './components/LoginForm/LoginForm';
-import SharedLayout from './components/SharedLayout/SharedLayout';
-import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import { fetchCurrentUser } from './redux/authoperations';
+import SharedLayout from "./components/SharedLayout/SharedLayout";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { fetchCurrentUser } from "./redux/auth/operations.js";
+import { selectIsLoggedIn } from "./redux/auth/selectors.js";
+
+const ContactsPage = lazy(() =>
+	import("./pages/ContactsPage/ContactsPage.jsx"));
+const LoginPage = lazy(() =>
+	import("./pages/LoginPage/LoginPage.jsx"));
+const RegisterPage = lazy(() =>
+	import("./pages/RegisterPage/RegisterPage.jsx"));
 
 function App() {
-	const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+	const isLoggedIn = useSelector(selectIsLoggedIn);
 
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-			dispatch(fetchCurrentUser());
-	}, [dispatch])
+		dispatch(fetchCurrentUser());
+	}, [dispatch]);
 
 	return (
 		<>
@@ -28,9 +34,9 @@ function App() {
 					/>
 					<Route
 						path="/login"
-						element={isLoggedIn ? <Navigate to="/contacts" /> : <LoginForm />}
+						element={isLoggedIn ? <Navigate to="/contacts" /> : <LoginPage />}
 					/>
-					<Route path="/register" element={<RegisterForm />} />
+					<Route path="/register" element={<RegisterPage />} />
 				</Route>
 			</Routes>
 		</>
