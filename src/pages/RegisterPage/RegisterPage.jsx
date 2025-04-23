@@ -14,7 +14,7 @@ export default function RegisterForm() {
         actions.resetForm();
       }}
 		>
-			<Form className="registerForm">
+			<Form className="form">
         <label>
           Name
           <Field type="text" name="name" />

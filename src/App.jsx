@@ -27,7 +27,6 @@ function App() {
 		<>
 			<Routes>
 				<Route path="/" element={<SharedLayout />}>
-					<Route index element={<div>This is Home page</div>} />
 					<Route
 						path="/contacts"
 						element={isLoggedIn ? <ContactsPage /> : <Navigate to="/login" />}
@@ -36,7 +35,8 @@ function App() {
 						path="/login"
 						element={isLoggedIn ? <Navigate to="/contacts" /> : <LoginPage />}
 					/>
-					<Route path="/register" element={<RegisterPage />} />
+					<Route path="/register"
+						element={isLoggedIn ? <Navigate to="/contacts" /> : <RegisterPage/>} />
 				</Route>
 			</Routes>
 		</>

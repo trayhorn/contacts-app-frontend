@@ -40,18 +40,15 @@ const authSlice = createSlice({
 				state.isRefreshing = false;
 				state.error = action.payload;
 			})
-			.addCase(registerUser.fulfilled, (state, action) => {
-				state.user = action.payload.user;
-				state.token = action.payload.token;
-				state.isRegistered = true;
-				state.loading = false;
-			})
-			.addCase(loginUser.fulfilled, (state, action) => {
-				state.user = action.payload.user;
-				state.token = action.payload.token;
-				state.isLoggedIn = true;
-				state.loading = false;
-			})
+			.addMatcher(
+				isAnyOf(registerUser.fulfilled, loginUser.fulfilled),
+				(state, action) => {
+					state.user = action.payload.user;
+					state.token = action.payload.token;
+					state.isLoggedIn = true;
+					state.loading = false;
+				}
+			)
 			.addMatcher(
 				isAnyOf(registerUser.pending, loginUser.pending, logoutUser.pending),
 				(state) => {

@@ -6,6 +6,16 @@
   box-sizing: border-box;
 }
 
+#root,
+main {
+  height: 100%;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+}
+
 body {
   margin: 0;
   padding: 20px;

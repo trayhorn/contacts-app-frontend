@@ -25,7 +25,20 @@ export default function SharedLayout() {
 			) : (
 				<main>
 					<AppBar />
-					<Suspense fallback={<div>Loading...</div>}>
+					<Suspense
+						fallback={
+							<div className="loaderOverlay">
+								<ThreeDots
+									visible={true}
+									height="80"
+									width="80"
+									color="#4CAF50"
+									ariaLabel="three-dots-loading"
+									wrapperClass="loader"
+								/>
+							</div>
+						}
+					>
 						{loading ? (
 							<div className="loaderOverlay">
 								<ThreeDots
@@ -40,7 +53,6 @@ export default function SharedLayout() {
 						) : (
 							<Outlet />
 						)}
-						{/* <Outlet /> */}
 					</Suspense>
 				</main>
 			)}

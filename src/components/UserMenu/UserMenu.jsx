@@ -10,7 +10,9 @@ export default function UserMenu() {
 	return (
 		<nav className="userMenuNav">
 			<p>Welcome, {username}</p>
-			<button onClick={() => dispatch(logoutUser())}>Log out</button>
+			<button className="auth-button" onClick={() => dispatch(logoutUser())}>
+				Log out
+			</button>
 		</nav>
 	);
 }

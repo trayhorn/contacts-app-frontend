@@ -14,7 +14,7 @@ export default function LoginForm() {
 				actions.resetForm();
 			}}
 		>
-			<Form className="registerForm">
+			<Form className="form">
 				<label>
 					Email
 					<Field autoComplete="true" type="email" name="email" />

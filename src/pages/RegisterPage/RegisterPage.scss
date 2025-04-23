@@ -1,14 +1,24 @@
-.registerForm {
+@use "../../variables.scss" as *;
+
+.form {
   display: flex;
   flex-direction: column;
+  flex: 1;
+  justify-content: center;
+  gap: $spacing-md;
+  margin: 0 auto;
   width: 300px;
 
   input {
     width: 100%;
+    padding: $spacing-sm;
+    font-size: 1rem;
   }
 
   button {
-    width: 30%;
+    width: 100%;
+    padding: $spacing-sm;
+    font-size: 1rem;
     margin: 10px auto 0;
     cursor: pointer;
   }

@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:3000";
+axios.defaults.baseURL = "https://contacts-book-be.onrender.com";
 
 const setAuthHeader = (token) => {
 	axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -34,7 +34,7 @@ export const loginUser = createAsyncThunk(
 			setAuthHeader(data.token);
 			return data;
 		} catch (e) {
-			return thunkAPI.rejectWithValue(e.message);
+			return thunkAPI.rejectWithValue(e.response.data.message);
 		}
 	}
 );

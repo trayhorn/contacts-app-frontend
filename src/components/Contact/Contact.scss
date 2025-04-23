@@ -1,5 +1,4 @@
-@import "../../variables.scss";
-
+@use "../../variables.scss" as *;
 .contact {
   display: flex;
   align-items: center;
