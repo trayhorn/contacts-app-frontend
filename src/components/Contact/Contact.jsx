@@ -9,12 +9,12 @@ import { passEditId } from "../../redux/contactsSlice";
 import { deleteContact } from "../../redux/operations";
 import { selectToken } from "../../redux/auth/selectors";
 
-export default function Contact({ contact: {id, name, number } }) {
+export default function Contact({ contact: {_id, name, number } }) {
 	const dispatch = useDispatch();
 	const token = useSelector(selectToken);
 
 	const handleEditClick = () => {
-		dispatch(passEditId({id, name, number}));
+		dispatch(passEditId({_id, name, number}));
 		dispatch(toggleModal(true));
 	}
 
@@ -34,7 +34,7 @@ export default function Contact({ contact: {id, name, number } }) {
 				<MdEdit />
 			</button>
 			<button className="button" onClick={() => {
-				dispatch(deleteContact({id, token}));
+				dispatch(deleteContact({_id, token}));
 			}}>
 				<MdDelete />
 			</button>
@@ -44,7 +44,7 @@ export default function Contact({ contact: {id, name, number } }) {
 
 Contact.propTypes = {
 	contact: PropTypes.shape({
-		id: PropTypes.string,
+		_id: PropTypes.string,
 		name: PropTypes.string,
 		number: PropTypes.string,
 	})
