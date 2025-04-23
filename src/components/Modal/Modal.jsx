@@ -11,14 +11,14 @@ import { selectToken } from "../../redux/auth/selectors";
 export default function ModalComponent() {
 	const token = useSelector(selectToken);
 	const modalState = useSelector(selectIsModalOpen);
-	const { id, name, number } = useSelector(selectContactToEdit);
+	const { _id, name, number } = useSelector(selectContactToEdit);
 
   const dispatch = useDispatch();
 
   Modal.setAppElement("#root");
 
   const handleSubmit = (values) => {
-    dispatch(editContact({id, contact: {...values}, token}));
+    dispatch(editContact({_id, contact: {...values}, token}));
     dispatch(toggleModal(false));
   }
 

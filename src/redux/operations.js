@@ -1,8 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const fetchAllContacts =
-  createAsyncThunk('contacts/fetchAll', async (token, thunkApi) => {
+export const fetchAllContacts = createAsyncThunk(
+	'contacts/fetchAll',
+	async (_, thunkApi) => {
     try {
       const { data } = await axios.get("/api/contacts/");
 			return data;
@@ -39,7 +40,7 @@ export const editContact = createAsyncThunk(
 	"contacts/editContact",
 	async (params, thunkApi) => {
 		try {
-			const { data } = await axios.patch(
+			const { data } = await axios.put(
 				`/api/contacts/${params._id}`,
 				params.contact
 			);

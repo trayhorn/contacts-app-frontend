@@ -12,6 +12,7 @@ import { selectToken } from "../../redux/auth/selectors";
 export default function Contact({ contact: {_id, name, number } }) {
 	const dispatch = useDispatch();
 	const token = useSelector(selectToken);
+	console.log(_id);
 
 	const handleEditClick = () => {
 		dispatch(passEditId({_id, name, number}));
