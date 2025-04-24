@@ -42,7 +42,7 @@ export const contactsSlice = createSlice({
 			})
 			.addCase(deleteContact.fulfilled, (state, action) => {
 				state.error = null;
-				state.items = state.items.filter((el) => el.id !== action.payload.id);
+				state.items = state.items.filter((el) => el._id !== action.payload._id);
 				state.isLoading = false;
 			})
 			.addCase(editContact.fulfilled, (state, action) => {
