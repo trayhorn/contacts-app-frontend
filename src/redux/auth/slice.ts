@@ -6,6 +6,18 @@ import {
 	fetchCurrentUser,
 } from "./operations";
 
+type authState = {
+	user: {
+		name: string | null,
+		email?: string | null,
+	},
+	token: string | null;
+	isLoggedIn: boolean;
+	isRefreshing: boolean;
+	error: unknown;
+	loading: boolean;
+}
+
 const authSlice = createSlice({
 	name: "auth",
 	initialState: {
@@ -18,7 +30,8 @@ const authSlice = createSlice({
 		isRefreshing: false,
 		error: null,
 		loading: false,
-	},
+	} as authState,
+	reducers: {},
 	extraReducers: (builder) => {
 		builder
 			.addCase(logoutUser.fulfilled, (state) => {

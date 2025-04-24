@@ -4,8 +4,8 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import SharedLayout from "./components/SharedLayout/SharedLayout";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { fetchCurrentUser } from "./redux/auth/operations.js";
-import { selectIsLoggedIn } from "./redux/auth/selectors.js";
+import { fetchCurrentUser } from "./redux/auth/operations";
+import { selectIsLoggedIn } from "./redux/auth/selectors";
 
 const ContactsPage = lazy(() =>
 	import("./pages/ContactsPage/ContactsPage.jsx"));

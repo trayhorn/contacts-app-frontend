@@ -1,11 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
-import { toggleModal } from "../../redux/modalSlice";
 import { editContact } from "../../redux/operations";
-import { selectIsModalOpen } from "../../redux/modalSlice";
+import { selectIsModalOpen, toggleModal } from "../../redux/modalSlice";
 import { selectContactToEdit } from "../../redux/contactsSlice";
 import FormikForm from "../FormikForm/FormikForm";
-import Modal from "react-modal";
 import { selectToken } from "../../redux/auth/selectors";
+import Modal from "react-modal";
 
 
 export default function ModalComponent() {

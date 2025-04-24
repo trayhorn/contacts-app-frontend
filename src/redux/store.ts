@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import contactsReducer from './contactsSlice';
-import filterReducer from './filterSlice';
-import modalReducer from './modalSlice';
-import authReducer from './auth/slice';
+import filterReducer from "./filterSlice"
+import modalReducer from "./modalSlice";
+import authReducer from "./auth/slice";
 import {
 	persistStore,
 	persistReducer,
@@ -41,6 +41,8 @@ const store = configureStore({
 const persistor = persistStore(store);
 
 export { store, persistor };
+
+export type RootState = ReturnType<typeof store.getState>;
 
 
 
