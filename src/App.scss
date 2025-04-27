@@ -53,6 +53,16 @@ h1 {
 .auth-button:hover {
   border-color: $mainBgColor;
 }
+
+.auth-link {
+  display: inline-block;
+}
+.auth-link.active {
+  background-color: $mainBgColor;
+}
+.auth-link.active .auth-button {
+  color: white;
+}
 .auth-link + .auth-link {
   margin-left: 10px;
 }

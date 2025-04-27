@@ -9,8 +9,8 @@ import { FormValues } from "../FormikForm/FormikForm";
 
 export default function ContactForm() {
 	const dispatch = useDispatch<AppDispatch>();
-	const token = useSelector(selectToken);
 
+	const token = useSelector(selectToken);
 	const allContacts = useSelector(selectAllContacts);
 
 	const handleSubmit = (values: FormValues) => {
@@ -22,9 +22,6 @@ export default function ContactForm() {
 	};
 
 	return (
-		<>
-			<FormikForm buttonText="Add contact" onSubmit={handleSubmit} />
-			<ToastContainer />
-		</>
+		<FormikForm buttonText="Add contact" onSubmit={handleSubmit} />
 	);
 }

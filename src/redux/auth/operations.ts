@@ -33,8 +33,9 @@ export const registerUser = createAsyncThunk<AuthResponse, RequestBody, {rejectV
 			setAuthHeader(data.token);
 			return data;
 		} catch (e) {
-			const err = e as AxiosError;
-			return thunkApi.rejectWithValue(err.message);
+			const err = e as AxiosError<{ message: string }>;
+			const errorMessage = err.response?.data.message ?? "Unknown error";
+			return thunkApi.rejectWithValue(errorMessage);
 		}
 	}
 );
@@ -48,7 +49,7 @@ type loginUserReturn = {
 
 export const loginUser = createAsyncThunk<
 	loginUserReturn,
-	Partial<RequestBody>,
+	Pick<RequestBody, "email" | "password">,
 	{ rejectValue: string }
 >("auth/login", async (body, thunkApi) => {
 	try {
@@ -56,8 +57,9 @@ export const loginUser = createAsyncThunk<
 		setAuthHeader(data.token);
 		return data;
 	} catch (e) {
-		const err = e as AxiosError;
-		return thunkApi.rejectWithValue(err.message);
+		const err = e as AxiosError<{ message: string }>;
+		const errorMessage = err.response?.data.message ?? "Unknown error";
+		return thunkApi.rejectWithValue(errorMessage);
 	}
 });
 
@@ -68,8 +70,9 @@ export const logoutUser = createAsyncThunk<void, void, {rejectValue: string}>(
 			await axios.post("/users/logout", null);
 			unsetAuthHeader();
 		} catch (e) {
-			const err = e as AxiosError;
-			return thunkApi.rejectWithValue(err.message);
+			const err = e as AxiosError<{ message: string }>;
+			const errorMessage = err.response?.data.message ?? "Unknown error";
+			return thunkApi.rejectWithValue(errorMessage);
 		}
 	}
 );
@@ -80,7 +83,7 @@ export const fetchCurrentUser = createAsyncThunk<{ name: string }, void, {state:
 		const persistedToken = thunkApi.getState().auth.token;
 
 		if (!persistedToken) {
-			return thunkApi.rejectWithValue("No token found");
+			return thunkApi.rejectWithValue("");
 		}
 
 		setAuthHeader(persistedToken);
@@ -91,8 +94,9 @@ export const fetchCurrentUser = createAsyncThunk<{ name: string }, void, {state:
 			});
 			return data;
 		} catch (e) {
-			const err = e as AxiosError;
-			return thunkApi.rejectWithValue(err.message);
+			const err = e as AxiosError<{ message: string }>;
+			const errorMessage = err.response?.data.message ?? "Unknown error";
+			return thunkApi.rejectWithValue(errorMessage);
 		}
 	}
 );

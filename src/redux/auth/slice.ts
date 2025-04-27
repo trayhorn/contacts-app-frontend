@@ -9,12 +9,11 @@ import {
 type authState = {
 	user: {
 		name: string | null,
-		email?: string | null,
 	},
 	token: string | null;
 	isLoggedIn: boolean;
 	isRefreshing: boolean;
-	error: unknown;
+	error: string | null;
 	loading: boolean;
 }
 
@@ -31,11 +30,15 @@ const authSlice = createSlice({
 		error: null,
 		loading: false,
 	} as authState,
-	reducers: {},
+	reducers: {
+		resetError: (state) => {
+			state.error = null;
+		}
+	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(logoutUser.fulfilled, (state) => {
-				state.user = { name: null, email: null };
+				state.user = { name: null };
 				state.token = null;
 				state.isLoggedIn = false;
 				state.loading = false;
@@ -51,7 +54,7 @@ const authSlice = createSlice({
 			})
 			.addCase(fetchCurrentUser.rejected, (state, action) => {
 				state.isRefreshing = false;
-				state.error = action.payload;
+				state.error = action.payload ?? null;
 			})
 			.addMatcher(
 				isAnyOf(registerUser.fulfilled, loginUser.fulfilled),
@@ -72,10 +75,12 @@ const authSlice = createSlice({
 				isAnyOf(registerUser.rejected, loginUser.rejected, logoutUser.rejected),
 				(state, action) => {
 					state.loading = false;
-					state.error = action.payload;
+					state.error = action.payload ?? null;
 				}
 			);
 	},
 });
+
+export const { resetError } = authSlice.actions;
 
 export default authSlice.reducer;

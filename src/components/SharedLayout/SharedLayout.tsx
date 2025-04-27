@@ -1,10 +1,11 @@
 import { Outlet } from "react-router-dom";
 import './SharedLayout.scss';
 import { useSelector } from "react-redux";
-import { ThreeDots } from "react-loader-spinner";
+import Loader from "../Loader";
 import AppBar from "../AppBar";
 import { Suspense } from "react";
 import { selectAuth } from "../../redux/auth/selectors";
+import { ToastContainer } from "react-toastify";
 
 export default function SharedLayout() {
 	const { isRefreshing, loading } = useSelector(selectAuth);
@@ -13,14 +14,7 @@ export default function SharedLayout() {
 		<>
 			{isRefreshing ? (
 				<div className="loaderOverlay">
-					<ThreeDots
-						visible={true}
-						height="80"
-						width="80"
-						color="#4CAF50"
-						ariaLabel="three-dots-loading"
-						wrapperClass="loader"
-					/>
+					<Loader />
 				</div>
 			) : (
 				<main>
@@ -28,32 +22,19 @@ export default function SharedLayout() {
 					<Suspense
 						fallback={
 							<div className="loaderOverlay">
-								<ThreeDots
-									visible={true}
-									height="80"
-									width="80"
-									color="#4CAF50"
-									ariaLabel="three-dots-loading"
-									wrapperClass="loader"
-								/>
+								<Loader />
 							</div>
 						}
 					>
 						{loading ? (
 							<div className="loaderOverlay">
-								<ThreeDots
-									visible={true}
-									height="80"
-									width="80"
-									color="#4CAF50"
-									ariaLabel="three-dots-loading"
-									wrapperClass="loader"
-								/>
+								<Loader />
 							</div>
 						) : (
 							<Outlet />
 						)}
-					</Suspense>
+						</Suspense>
+						<ToastContainer />
 				</main>
 			)}
 		</>

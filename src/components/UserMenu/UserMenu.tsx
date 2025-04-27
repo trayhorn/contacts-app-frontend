@@ -5,12 +5,12 @@ import { selectUser } from "../../redux/auth/selectors";
 import { AppDispatch } from "../../redux/store";
 
 export default function UserMenu() {
-	const {name: username} = useSelector(selectUser);
+	const { name } = useSelector(selectUser);
 	const dispatch = useDispatch<AppDispatch>();
 
 	return (
 		<nav className="userMenuNav">
-			<p>Welcome, {username}</p>
+			<p>Welcome, {name}</p>
 			<button className="auth-button" onClick={() => dispatch(logoutUser())}>
 				Log out
 			</button>
