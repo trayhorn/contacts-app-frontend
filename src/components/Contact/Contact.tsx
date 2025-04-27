@@ -1,5 +1,4 @@
 import "./Contact.scss";
-import PropTypes from "prop-types";
 import { FaPhoneAlt } from "react-icons/fa";
 import { BsPersonFill } from "react-icons/bs";
 import { MdDelete, MdEdit } from "react-icons/md";
@@ -8,16 +7,22 @@ import { toggleModal } from "../../redux/modalSlice";
 import { passEditId } from "../../redux/contactsSlice";
 import { deleteContact } from "../../redux/operations";
 import { selectToken } from "../../redux/auth/selectors";
+import { Contact as ContactType } from "../../redux/contactsSlice";
+import { AppDispatch } from "../../redux/store";
 
-export default function Contact({ contact: {_id, name, number } }) {
-	const dispatch = useDispatch();
+type ContactProps = {
+	contact: ContactType;
+}
+
+
+export default function Contact({ contact: { _id, name, number } }: ContactProps) {
+	const dispatch = useDispatch<AppDispatch>();
 	const token = useSelector(selectToken);
-	console.log(_id);
 
 	const handleEditClick = () => {
-		dispatch(passEditId({_id, name, number}));
+		dispatch(passEditId({ _id, name, number }));
 		dispatch(toggleModal(true));
-	}
+	};
 
 	return (
 		<div className="contact">
@@ -29,24 +34,17 @@ export default function Contact({ contact: {_id, name, number } }) {
 				<FaPhoneAlt />
 				{number}
 			</p>
-			<button
-				onClick={handleEditClick}
-				className="button">
+			<button onClick={handleEditClick} className="button">
 				<MdEdit />
 			</button>
-			<button className="button" onClick={() => {
-				dispatch(deleteContact({_id, token}));
-			}}>
+			<button
+				className="button"
+				onClick={() => {
+					if (token) dispatch(deleteContact({ _id, token }));
+				}}
+			>
 				<MdDelete />
 			</button>
 		</div>
 	);
 }
-
-Contact.propTypes = {
-	contact: PropTypes.shape({
-		_id: PropTypes.string,
-		name: PropTypes.string,
-		number: PropTypes.string,
-	})
-};

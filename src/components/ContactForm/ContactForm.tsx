@@ -4,19 +4,21 @@ import { selectAllContacts } from "../../redux/contactsSlice";
 import { selectToken } from "../../redux/auth/selectors";
 import FormikForm from "../FormikForm/FormikForm";
 import { ToastContainer, toast } from "react-toastify";
+import { AppDispatch } from "../../redux/store";
+import { FormValues } from "../FormikForm/FormikForm";
 
 export default function ContactForm() {
-	const dispatch = useDispatch();
+	const dispatch = useDispatch<AppDispatch>();
 	const token = useSelector(selectToken);
 
 	const allContacts = useSelector(selectAllContacts);
 
-	const handleSubmit = (values) => {
-		if (allContacts.find(el => el.number === values.number)) {
+	const handleSubmit = (values: FormValues) => {
+		if (allContacts.find((el) => el.number === values.number)) {
 			toast.error("Phone number already exists!");
 			return;
 		}
-		dispatch(addContact({ contact: {...values}, token }));
+		if (token) dispatch(addContact({ contact: { ...values }, token }));
 	};
 
 	return (

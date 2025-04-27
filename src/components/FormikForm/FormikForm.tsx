@@ -1,19 +1,32 @@
 import "./FormikForm.scss";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import { nanoid } from "nanoid";
 import * as Yup from "yup";
-import PropTypes from "prop-types";
+
+type FormikFormType = {
+	buttonText: string;
+	onSubmit: Function;
+	initialValues?: FormValues;
+};
+
+export type FormValues = {
+	name: string;
+	number: string;
+};
 
 
 export default function FormikForm({
 	buttonText,
 	onSubmit,
 	initialValues = { name: "", number: "+38" },
-}) {
+}: FormikFormType) {
 	const nameId = nanoid();
 	const numberId = nanoid();
 
-	const handleSubmit = (values, actions) => {
+	const handleSubmit = (
+		values: FormValues,
+		actions: FormikHelpers<FormValues>
+	) => {
 		onSubmit(values);
 		actions.resetForm();
 	};
@@ -60,15 +73,6 @@ export default function FormikForm({
 		</Formik>
 	);
 }
-
-FormikForm.propTypes = {
-	buttonText: PropTypes.string,
-	onSubmit: PropTypes.func,
-	initialValues: PropTypes.shape({
-		name: PropTypes.string,
-		number: PropTypes.string,
-	}),
-};
 
 const FormSchema = Yup.object({
   name: Yup.string().min(2, "Too Short!").required("This filed is required"),

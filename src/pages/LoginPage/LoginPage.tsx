@@ -2,9 +2,10 @@ import "../../pages/RegisterPage/RegisterPage.scss";
 import { Formik, Form, Field } from "formik";
 import { loginUser } from "../../redux/auth/operations";
 import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../redux/store";
 
 export default function LoginForm() {
-	const dispatch = useDispatch();
+	const dispatch = useDispatch<AppDispatch>();
 
 	return (
 		<Formik

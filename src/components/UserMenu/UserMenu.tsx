@@ -2,10 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../redux/auth/operations";
 import "./UserMenu.scss";
 import { selectUser } from "../../redux/auth/selectors";
+import { AppDispatch } from "../../redux/store";
 
 export default function UserMenu() {
 	const {name: username} = useSelector(selectUser);
-	const dispatch = useDispatch();
+	const dispatch = useDispatch<AppDispatch>();
 
 	return (
 		<nav className="userMenuNav">

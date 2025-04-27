@@ -1,19 +1,18 @@
 import ContactForm from '../../components/ContactForm/ContactForm';
 import SearchBox from '../../components/SearchBox/SearchBox';
 import ContactList from '../../components/ContactList/ContactList';
-import ModalComponent from "../../components/Modal/Modal";
+import ModalComponent from '../../components/Modal/Modal';
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { fetchAllContacts } from "../../redux/operations";
-import { selectToken } from '../../redux/auth/selectors';
+import { AppDispatch } from '../../redux/store';
 
 export default function ContactsPage() {
-  const dispatch = useDispatch();
-  const token = useSelector(selectToken);
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-		dispatch(fetchAllContacts(token));
-	}, [dispatch, token]);
+		dispatch(fetchAllContacts());
+	}, [dispatch]);
 
   return (
     <>

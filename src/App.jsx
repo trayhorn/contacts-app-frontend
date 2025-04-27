@@ -8,11 +8,11 @@ import { fetchCurrentUser } from "./redux/auth/operations";
 import { selectIsLoggedIn } from "./redux/auth/selectors";
 
 const ContactsPage = lazy(() =>
-	import("./pages/ContactsPage/ContactsPage.jsx"));
+	import("./pages/ContactsPage/ContactsPage.tsx"));
 const LoginPage = lazy(() =>
-	import("./pages/LoginPage/LoginPage.jsx"));
+	import("./pages/LoginPage/LoginPage.tsx"));
 const RegisterPage = lazy(() =>
-	import("./pages/RegisterPage/RegisterPage.jsx"));
+	import("./pages/RegisterPage/RegisterPage.tsx"));
 
 function App() {
 	const isLoggedIn = useSelector(selectIsLoggedIn);

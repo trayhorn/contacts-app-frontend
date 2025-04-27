@@ -39,19 +39,27 @@ export const registerUser = createAsyncThunk<AuthResponse, RequestBody, {rejectV
 	}
 );
 
-export const loginUser = createAsyncThunk(
-	"auth/login",
-	async (body, thunkApi) => {
-		try {
-			const { data } = await axios.post("/users/login", body);
-			setAuthHeader(data.token);
-			return data;
-		} catch (e) {
-			const err = e as AxiosError;
-			return thunkApi.rejectWithValue(err.message);
-		}
+type loginUserReturn = {
+	token: string;
+	user: {
+		name: string;
 	}
-);
+}
+
+export const loginUser = createAsyncThunk<
+	loginUserReturn,
+	Partial<RequestBody>,
+	{ rejectValue: string }
+>("auth/login", async (body, thunkApi) => {
+	try {
+		const { data } = await axios.post("/users/login", body);
+		setAuthHeader(data.token);
+		return data;
+	} catch (e) {
+		const err = e as AxiosError;
+		return thunkApi.rejectWithValue(err.message);
+	}
+});
 
 export const logoutUser = createAsyncThunk<void, void, {rejectValue: string}>(
 	"auth/logout",

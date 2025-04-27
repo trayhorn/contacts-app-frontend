@@ -4,9 +4,12 @@ import Contact from "../Contact/Contact";
 import ErrorMessage from "../Error/error";
 import { ThreeDots } from "react-loader-spinner";
 import "./ContactList.scss";
+import { RootState } from "../../redux/store";
 
 export default function ContactList() {
-	const { items, isLoading, error } = useSelector((state) => state.contacts);
+	const { items, isLoading, error } = useSelector(
+		(state: RootState) => state.contacts
+	);
 	const filteredContacts = useSelector(selectFilteredContacts);
 
 	return (
