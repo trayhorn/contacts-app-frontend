@@ -6,18 +6,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchCurrentUser } from "./redux/auth/operations";
 import { selectIsLoggedIn } from "./redux/auth/selectors";
+import { AppDispatch } from "./redux/store";
 
-const ContactsPage = lazy(() =>
-	import("./pages/ContactsPage/ContactsPage.tsx"));
-const LoginPage = lazy(() =>
-	import("./pages/LoginPage/LoginPage.tsx"));
-const RegisterPage = lazy(() =>
-	import("./pages/RegisterPage/RegisterPage.tsx"));
+const ContactsPage = lazy(() => import("./pages/ContactsPage/ContactsPage"));
+const LoginPage = lazy(() => import("./pages/LoginPage"));
+const RegisterPage = lazy(() => import("./pages/RegisterPage"));
 
 function App() {
 	const isLoggedIn = useSelector(selectIsLoggedIn);
 
-	const dispatch = useDispatch();
+	const dispatch = useDispatch<AppDispatch>();
 
 	useEffect(() => {
 		dispatch(fetchCurrentUser());
@@ -36,8 +34,12 @@ function App() {
 						path="login"
 						element={isLoggedIn ? <Navigate to="/contacts" /> : <LoginPage />}
 					/>
-					<Route path="register"
-						element={isLoggedIn ? <Navigate to="/contacts" /> : <RegisterPage/>} />
+					<Route
+						path="register"
+						element={
+							isLoggedIn ? <Navigate to="/contacts" /> : <RegisterPage />
+						}
+					/>
 				</Route>
 			</Routes>
 		</>

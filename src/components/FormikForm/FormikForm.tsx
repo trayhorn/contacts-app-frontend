@@ -36,6 +36,8 @@ export default function FormikForm({
 			initialValues={initialValues}
 			onSubmit={handleSubmit}
 			validationSchema={FormSchema}
+			validateOnBlur={false}
+			validateOnChange={false}
 		>
 			<Form className="contactForm">
 				<div className="inputContainer">

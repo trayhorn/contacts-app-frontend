@@ -1,7 +1,5 @@
 import "./Contact.scss";
-import { FaPhoneAlt } from "react-icons/fa";
-import { BsPersonFill } from "react-icons/bs";
-import { MdDelete, MdEdit } from "react-icons/md";
+import { FaPhoneAlt, BsPersonFill, MdDelete, MdEdit } from "../../utils/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleModal } from "../../redux/modalSlice";
 import { passEditId } from "../../redux/contactsSlice";

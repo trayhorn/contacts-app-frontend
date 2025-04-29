@@ -3,7 +3,7 @@ import { addContact } from "../../redux/operations";
 import { selectAllContacts } from "../../redux/contactsSlice";
 import { selectToken } from "../../redux/auth/selectors";
 import FormikForm from "../FormikForm/FormikForm";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { AppDispatch } from "../../redux/store";
 import { FormValues } from "../FormikForm/FormikForm";
 
